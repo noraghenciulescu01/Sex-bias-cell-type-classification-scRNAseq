@@ -1,0 +1,8 @@
+## Reproducing the classification experiment
+The classification was run on the Delft AI cluster (https://doc.daic.tudelft.nl), which uses Slurm as a job scheduling system. At every annotation level, the model is trained and tested on all 11 versions of the training set (corresponding to different proportions of female cells: 0, 0.1, 0.2, ..., 0.9, 1), at all annotation levels (2-5). Each of these classification tasks is submitted as a separate job, for both the KNN classifier and the RF classifier. In total, this amounts to 88 jobs. The experiment is subsequently repeated for 3 more random seeds, thus a total of 352 classification experiments are caried out. <br>
+
+The folders knn_templates and rf_templates contain the classification scripts used for each annotation level, for the KNN and RF classifier respectively. The scripts are given only for one proportion of female cells; instructions on how to adapt the script for the other 10 proportions are in the README files within each folder. <br>
+
+The helper_functions file is common among all classification tasks for a given random seed. It should be placed in the same folder as the classification scripts for each proportions, for each annotaiton level, to allow the functions to be imported. <br>
+
+In order to repeat the experiment across multiple random seeds, only the helper_functions file needs to be updated. The actual classification scripts to do not employ any random processes. <br>
