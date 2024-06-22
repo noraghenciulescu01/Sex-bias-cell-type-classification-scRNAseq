@@ -1,0 +1,13 @@
+library(edgeR)
+library(SingleCellExperiment)
+library(dplyr)
+library(ggplot2)
+library(limma)
+library(muscat)
+library(purrr)
+library(scater)
+library(Matrix)
+library(scMerge)
+
+pdc_object <- readRDS("covid/individualDS_covid/result_Plasmacytoid DCs.rds")
+write.csv(pdc_object[[1]], "covid/individualDS_covid/result_Plasmacytoid DCs.csv")
