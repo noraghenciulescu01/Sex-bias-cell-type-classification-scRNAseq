@@ -127,7 +127,7 @@ def final_evaluate_clf(predictions, true_labels, classes, prop, sex):
     accuracy = accuracy_score(true_labels, predictions)
 
     # F1 per class
-    f1_per_class = f1_score(true_labels, predictions, average=None)
+    f1_per_class = robust_f1_score(true_labels, predictions, classes)
 
     # Median F1
     median_f1 = np.median(f1_per_class)
@@ -141,7 +141,8 @@ def final_evaluate_clf(predictions, true_labels, classes, prop, sex):
     # Confusion matrix
     cm = confusion_matrix(true_labels, predictions, labels=classes)
     # Normalized confusion matrix:
-    cm_normalized = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+    eps = 1e-9  # to avoid division by 0
+    cm_normalized = cm.astype('float') / (cm.sum(axis=1)[:, np.newaxis] + eps)
 
     
     # Create dictionary
@@ -164,6 +165,17 @@ def final_evaluate_clf(predictions, true_labels, classes, prop, sex):
 
 
 # Helper functions:
+
+def robust_f1_score(y_true, y_pred, labels):
+    f1_scores = []
+    for label in labels:
+        if (y_pred == label).sum() == 0:
+            # no predictions for this class -> set F1 to 0
+            f1_scores.append(0.0)
+        else:
+            f1 = f1_score(y_true == label, y_pred == label, zero_division=0)
+            f1_scores.append(f1)
+    return np.array(f1_scores)
 
 def plot_confusion(confusion_matrix, classes, title, normalize = False):
     '''
