@@ -1,16 +1,22 @@
 # Assessing the effects of sex bias on cell type classification in scRNA-seq data
 
 ## Organization
-This repository is divided into 9 sub-sections of experiments:
-- Exploration of the HLCA core
-- Classification templates for the HLCA core
-- Analysis of classification results for the HLCA core
-- Differential expression analysis for the HLCA core
-- Generation + exploration of the disease datasets
-- Classification templates for the disease datasets
-- Analysis of classification results for the disease datasets
-- Differential expression analysis for COVID-19
-- Batch correction for a subset of the HLCA core
+This repository is divided into 9 sub-sections of experiments.
+
+* On the HLCA core:
+  - Exploration
+  - Classification templates
+  - Analysis of classification results
+  - Differential expression analysis
+
+* For the disease data:
+  - Generation + Exploration
+  - Classification templates
+  - Analysis of classification results
+  - Differential expression analysis (for COVID-19 only)
+
+* Batch correction for a subset of the HLCA core.
+
 
 Sub-sections are numbered in the order that they are being referred to in the paper; notebooks or scripts within each folder are also numbered. Several analyses require results from previous experiments to work, thus everything should be run in order when repeating. Most experiments are performed  in Jupyter notebooks, but a few use Python or R scripts. Paths to import the data or results from other analyses should be changed when re-running the code.
 
